@@ -1,0 +1,29 @@
+modLoader="javafml"
+loaderVersion="[4,)"
+license="MIT"
+issueTrackerURL="https://github.com/Igoryok95/Structure-Control/issues"
+
+[[mods]]
+modId="structure_control"
+version="${version}"
+displayName="Structure Control"
+displayURL="https://github.com/Igoryok95/Structure-Control"
+authors="Igoryok95"
+description='''Server-side structure inspection, reversible structure spawn control, unregister and persistent undo commands. Clients do not need this mod. English and Russian command messages.'''
+
+[[mixins]]
+config="structure_control.mixins.json"
+
+[[dependencies.structure_control]]
+modId="neoforge"
+type="required"
+versionRange="[21.1.234,21.2)"
+ordering="NONE"
+side="BOTH"
+
+[[dependencies.structure_control]]
+modId="minecraft"
+type="required"
+versionRange="[1.21.1]"
+ordering="NONE"
+side="BOTH"

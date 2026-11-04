@@ -1,0 +1,71 @@
+plugins {
+    id 'java-library'
+    id 'net.neoforged.moddev' version '2.0.141'
+}
+
+version = mod_version
+group = 'io.github.igoryok95.structurecontrol'
+base.archivesName = 'structure-control-neoforge-1.21.1'
+java.toolchain.languageVersion = JavaLanguageVersion.of(21)
+java.withSourcesJar()
+
+if (providers.gradleProperty('gameTests').isPresent()) {
+    sourceSets.main.java.srcDir('src/gameTest/java')
+    sourceSets.main.resources.srcDir('src/gameTest/resources')
+}
+
+neoForge {
+    version = project.neo_version
+    runs {
+        client {
+            client()
+            gameDirectory = layout.projectDirectory.dir('run/client')
+            if (providers.gradleProperty('uiSmoke').isPresent()) {
+                systemProperty 'structurecontrol.clientSmoke', 'true'
+                programArguments.addAll '--quickPlaySingleplayer', 'StructureControlSmoke', '--width', '1280', '--height', '960'
+            }
+        }
+        server {
+            server()
+            gameDirectory = layout.projectDirectory.dir('run/server')
+            programArgument '--nogui'
+            if (providers.gradleProperty('restartSmoke').isPresent()) {
+                systemProperty 'structurecontrol.restartSmoke', providers.gradleProperty('restartSmoke').get()
+            }
+        }
+        gameTestServer {
+            type = 'gameTestServer'
+            gameDirectory = layout.projectDirectory.dir('run/gametest')
+            systemProperty 'neoforge.enabledGameTestNamespaces', 'structure_control'
+        }
+        configureEach {
+            logLevel = org.slf4j.event.Level.INFO
+        }
+    }
+    mods {
+        structure_control { sourceSet(sourceSets.main) }
+    }
+    unitTest {
+        enable()
+        testedMod = mods.structure_control
+    }
+}
+
+repositories { mavenCentral() }
+dependencies {
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.10.2'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+    if (providers.gradleProperty('lithiumJar').isPresent()) {
+        runtimeOnly files(providers.gradleProperty('lithiumJar').get())
+    }
+}
+tasks.named('test') { useJUnitPlatform() }
+tasks.withType(JavaCompile).configureEach { options.encoding = 'UTF-8' }
+def metadata = [version: mod_version]
+tasks.named('processResources', ProcessResources) {
+    inputs.properties(metadata)
+    filesMatching('META-INF/neoforge.mods.toml') { expand(metadata) }
+}
+tasks.named('jar', Jar) {
+    manifest.attributes('Implementation-Version': project.version, 'Implementation-Vendor': 'Igoryok95')
+}

@@ -1,0 +1,8 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "io.github.igoryok95.structurecontrol.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "mixins": ["StructureManagerAccessor", "ChunkGeneratorMixin"],
+  "injectors": {"defaultRequire": 1}
+}
