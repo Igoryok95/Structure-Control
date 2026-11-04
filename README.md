@@ -6,6 +6,12 @@ Technical checks and an isolated interactive map check passed. See [validation r
 
 Inspect an existing structure, disable its special mob spawns, or unregister it while keeping its blocks. Changes can be made while the server is running. The optional client map shows terrain, a chunk grid, structure boundaries and actions for the selected instance.
 
+## Download
+
+[Download Structure Control 1.0.0](https://github.com/Igoryok95/Structure-Control/releases/download/v1.0.0/structure-control-neoforge-1.21.1-1.0.0.jar), or visit [GitHub Releases](https://github.com/Igoryok95/Structure-Control/releases/latest).
+
+Use the regular JAR for installation. The separate `-sources.jar` contains source code.
+
 ## Installation
 
 Install the JAR on the server and restart it once. Players can connect without installing the mod. Administrators who want the map install the same JAR on their client. There are no required third-party mods.
