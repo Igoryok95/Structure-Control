@@ -2,7 +2,7 @@
 
 An administrator utility for **Minecraft 1.21.1 / NeoForge** by Igoryok95.
 
-Implementation candidate: technical checks passed; the optional map still needs visual verification. See [validation status](docs/validation.md).
+Technical checks and an isolated interactive map check passed. See [validation results and compatibility limits](docs/validation.md).
 
 Inspect an existing structure, disable its special mob spawns, or unregister it while keeping its blocks. Changes can be made while the server is running. The optional client map shows terrain, a chunk grid, structure boundaries and actions for the selected instance.
 

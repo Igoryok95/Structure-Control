@@ -178,6 +178,10 @@ public final class StructureMapScreen extends Screen {
         terrain.upload();
     }
 
+    @Override public void renderBackground(GuiGraphics graphics, int mouseX, int mouseY, float partialTick) {
+        // The map draws its own background. Screen.render must not blur the map before drawing widgets.
+    }
+
     @Override public void render(GuiGraphics graphics, int mouseX, int mouseY, float partialTick) {
         graphics.fill(0, 0, width, height, 0xf012151c);
         graphics.drawCenteredString(font, title, width / 2, 13, 0xffeeeeee);
